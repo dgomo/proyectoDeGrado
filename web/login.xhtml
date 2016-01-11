@@ -1,0 +1,54 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <article id="main" class="container special">
+                    <h:form id="loginForm"> 
+                        <i><h3><h:messages id="mensaje" class="col-sm-offset-3" style="color:brown"/></h3></i>
+                        <table columns="2" style="margin-left: 100px;float: left;margin-top: 0px" class="table">
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Iniciar Sesión en CKWEB " class="col-sm-offset-3 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputText value="NickName: " class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="username" title="NickName" value="#{registroController.usuario.nickname}" required="true" class="form-control" pt:placeholder="NickName" label="NickName"></h:inputText>
+                                    <i><h3><h:message for="username" style="color:brown" /></h3></i>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">        
+                                <h2><strong><h:outputText value="Contraseña:" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputSecret id="password" title="Contraseña" value="#{registroController.usuario.contrasena}" required="true" class="form-control" pt:placeholder="Contraseña" label="Contraseña"></h:inputSecret>                                            
+                                    <i><h3><h:message for="password" style="color:brown" /></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-2 col-xs-12">
+                                    <h2><h:commandButton action="#{registroController.loginUsuario()}" title="Iniciar" value="Iniciar Sesión" class="btn btn-primary"></h:commandButton></h2>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/><br/><br/><br/>
+                            <div class="form-group"> 
+                                <h1><h:link outcome="/registrar" value="Regístrate"  title="Regístrate Ahora" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></h1>
+                            </div>
+                            <br/>
+                            <div class="form-group"> 
+                                <h1><h:link outcome="/recuperarContrasena" title="Has olvidado tu contraseña" value="¿Olvidó su contraseña?" class="col-sm-offset-2 col-sm-4 col-xs-12 control-label"/></h1>
+                            </div>
+                        </table>
+                    </h:form>
+                </article>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,76 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content"> 
+        <!-- INICIO DEL PANEL PRINCIPAL -->
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <!-- RESULTADOS DE LA BÚSQUEDA -->
+            <div class="col-sm-offset-1" >
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <h1><font size="6"><h:outputText value="Resultados de la Búsqueda: " class="col-sm-8 control-label"/></font></h1><br/><br/>
+                        <div class="col-sm-offset-1">
+                            <ul>
+                                <li><i><h1>#{busquedaController.palabra}</h1></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <h:dataTable id="dataTable" var="item" value="#{busquedaController.muestra}" styleClass="table table-striped table-hover">
+                        <hr>
+                            <h:column class="active">
+                                <div class="archivo contenedor-entrada">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-8 col-xs-10">
+                                            <div class="col-sm-offset-1">
+                                                <p align="center">
+                                                    <div class="controles">
+                                                        <div class="bg-primary borde-abajo">
+                                                            <h:form>
+                                                                <h:commandLink action="#{busquedaController.redireccionar(item)}"><i class="fa fa-play-circle fa-2x"></i></h:commandLink>
+                                                            </h:form>
+                                                        </div>
+                                                        <div>
+                                                            <img src="#{request.contextPath}/images/Logo_CKWEB.png" height="47px" width="47px"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="contenedor-media">
+                                                        <h:form>
+                                                            <h:commandLink action="#{busquedaController.redireccionar(item)}">
+                                                                <img  width="300" height="200" src="http://img.youtube.com/vi/#{item.url}/hqdefault.jpg" data-toogle="tooltip" data-placement="bottom" title="#{item.nombre}"></img>
+                                                            </h:commandLink>
+                                                        </h:form>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-10">
+                                            <h2><font size="5"><h:outputText value="#{item.nombre}"/></font></h2><br/>
+                                            <i><font size="4"><p align="justify"><h:outputText value="#{busquedaController.formatDescripcion(item.descripcion)}"/></p></font></i>
+                                            <h3><font size="4"><h:outputText value="#{busquedaController.formatDate(item.fecha)}"/></font></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </h:column>
+                        </hr>
+                    </h:dataTable>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-1 col-xs-8">
+                        <h:form><h:commandButton id="button1" value="← Ant" styleClass="button"  action="#{busquedaController.paginarAnt()}"  class="btn btn-primary"/></h:form>
+                    </div>
+                    <div class="col-sm-offset-9 col-sm-1">
+                        <h:form><h:commandButton id="button2" value="Sig →" styleClass="button" action="#{busquedaController.paginarSig()}" class="btn btn-primary"/></h:form>
+                    </div>  
+                </div>
+            </div>  
+        </div>
+    </ui:define>
+</ui:composition>

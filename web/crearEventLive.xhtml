@@ -1,0 +1,90 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:jsf="http://java.sun.com/jsf"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <div class="col-md-8 col-sm-8 col-xs-12 foros">
+                    <article id="main" class="container special">
+                        <h:form id="formCreateEventLive" rendered="#{utilControler.session}">   
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Crear EventLive en CKWEB" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 1" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Titulo de la Transmisión: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="titulo" value="#{streamingController.titulo}" title="Titulo" maxlength="200" required="true" class="form-control" pt:placeholder="Titulo" label="Titulo">
+                                    </h:inputText>
+                                    <i><h3><h:message for="titulo" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Descripción de la Transmisión: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputTextarea id="descripcion" value="#{streamingController.descripcion}" title="Descripción" required="true" class="form-control" rows="6" pt:placeholder="Descripción" label="Descripcion"/>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/><br/><br/><br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Fecha de la Transmisión: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="dates" value="#{streamingController.fecha}" required="true" title="Fecha" class="form-control" pt:type="date" label="Fecha">
+                                    </h:inputText>
+                                    <i><h3><h:message for="dates" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 2" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><p align="justify"><h:outputText value="Escribe los todos Tag a los cuales quieres relacionar la Transmisión, estos Tag van separados por una simple coma y al finalizar dar click en ( Almacenar Tag )" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i><br/>
+                                <br/><br/><h2><strong><h:outputLabel value="Tag: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="tag" value="#{streamingController.palabra}" class="form-control" pt:placeholder="Tag" label="Tag"/>
+                                    <i><h3><h:message for="tag" style="color:brown"/></h3></i>
+                                    <br/>
+                                    <h:commandButton value="Almacenar Tag" title="Almacenar" action="#{streamingController.addTag()}" class="btn btn-info" style="text-align: center;"/>
+                                    <h:dataTable id="tags" var="item" value="#{streamingController.tagRelacion}" styleClass="table table-striped table-hover">
+                                        <h:column>
+                                            <p><font size="3"><i><h:outputText value="#{item}" class="col-sm-5 control-label"/></i></font></p>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>        
+                            </div> 
+                            <br/>
+                            <div class="form-group">
+                                <br/><br/><br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 3" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><br/><i><h3><p align="justify"><h:outputText value="Escoja una de las Franjas postuladas para realacionar allí su Transmisión" class="col-sm-offset-1 col-sm-6 ccol-xs-12 ontrol-label"/></p></h3></i>
+                            </div>
+                            <br/><br/>
+                            <div class="form-group col-sm-offset-1 col-sm-6 col-md-7 col-xs-12">
+                                <h:dataTable id="temas" rendered="#{streamingController.tema == null}" var="item" value="#{streamingController.temasRelacion}" styleClass="table table-striped table-hover">
+                                    <h:column>
+                                        <p><font size="4"><strong><h:outputText value="#{item.nombre}" class="col-sm-6 col-xs-12 control-label"/></strong></font></p>
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton value="Elegir Franja" action="#{streamingController.setTema(item)}" title="Elegir" class="btn btn-info" style="text-align: center;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                            <h:outputText rendered="#{streamingController.tema != null}" value="Franja seleccionada #{streamingController.tema.nombre}"/>
+                            <br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-3 col-xs-12">
+                                    <h:commandButton id="button" value="Crear EventLive" rendered="#{utilControler.session}" title="Crear" styleClass="button" action="#{streamingController.crearEventoLlamar()}"  style="text-align: center;" class="btn btn-primary"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </article>
+                </div>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

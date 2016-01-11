@@ -1,0 +1,61 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <article id="main" class="container special">
+                    <h:form id="recuperarForm">
+                        <table columns="2" style="margin-left: 100px;float: left;margin-top: 0px" class="table">
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Recupera tu Contraseña en CKWEB " class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="NickName: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="username" value="#{registroController.usuario.nickname}" title="NickName" maxlength="15" required="true" class="form-control" pt:placeholder="NickName" label="NickName">
+                                        <f:ajax event="blur" listener="#{registroController.findByNickNameForQuestion()}" execute="username" render="mensajes, question"/>
+                                    </h:inputText>
+                                    <i><h3><h:message for="username" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Pregunta: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:selectOneMenu  id="question" value="#{registroController.pregunta.pregunta}" styleClass="menu" title="Escoje tu Pregunta Favorita" class="form-control" pt:placeholder="Pregunta de Seguridad" label="Pregunta">
+                                        <f:selectItem id="item1" itemLabel="¿Cuál es tu película favorita?" itemValue="¿Cuál es tu película favorita?" />
+                                        <f:selectItem id="item2" itemLabel="¿Cuál es tu canción favorita?" itemValue="¿Cuál es tu canción favorita?" />
+                                        <f:selectItem id="item3" itemLabel="¿Cuál fue el barrio donde creciste?" itemValue="¿Cuál fue el barrio donde creciste?" />
+                                        <f:selectItem id="item4" itemLabel="¿Cuál es tu libro favorito?" itemValue="¿Cuál es tu libro favorito?" />
+                                        <f:selectItem id="item5" itemLabel="¿Cuál es tu color favorito?" itemValue="¿Cuál es tu color favorito?" />
+                                    </h:selectOneMenu>
+                                    <i><h3><h:message for="question" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Respuesta: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="answer" value="#{registroController.pregunta.respuesta}" title="Respuesta de Seguridad" maxlength="20" required="true" class="form-control" pt:placeholder="Respuesta" label="Respuesta"></h:inputText>
+                                    <i><h3><h:message for="answer" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-3 col-xs-12">
+                                    <h:commandButton action="#{registroController.recuperarContraseña()}" value="Recuperar"  title="Recuperar Contraseña" class="btn btn-primary"></h:commandButton>    
+                                </div>
+                            </div>
+                        </table>
+                    </h:form>
+                </article>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

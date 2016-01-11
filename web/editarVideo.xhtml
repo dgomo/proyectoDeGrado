@@ -1,0 +1,30 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:jsf="http://java.sun.com/jsf"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+        <div class="col-md-10 col-sm-8 col-xs-12">
+            <div class="row">
+                <div class="col-md-offset-1">
+                    <h:form rendered="#{utilControler.session}">
+                        <i><h3><h:messages id="mensajes" style="color:brown"/></h3></i>
+                        <h1><font size="6"><h:inputText value="#{busquedaController.nombre}" id="titulo" title="Titulo" maxlength="190" required="true" class="form-control" label="Titulo"/></font></h1><br/>
+                        <iframe width="880" height="560" src="//www.youtube.com/embed/#{busquedaController.audiovisual.url}?autoplay=1;rel=0;theme=light;modestbranding=1;fs=1" frameborder="0">          
+                        </iframe>
+                        <br/><br/>
+                        <h:outputText value="URL: "/>
+                        <h:inputText value="#{busquedaController.url}" title="URL" required="true" class="form-control" label="URL"/>
+                        <br/><br/>
+                        <h2>SOBRE EL VIDEO:</h2><br/>                        
+                        <h:inputTextarea value="#{busquedaController.descripcion}" title="Descripción" required="true" class="form-control" rows="6" label="Descripcion"/>
+                        <h2><h:outputText value="Publicado el #{busquedaController.formatDate(busquedaController.audiovisual.fecha)}"/></h2>                        
+                        <h:commandButton id="button" rendered="#{utilControler.session}" value="Aceptar" title="Aceptar" styleClass="button" action="#{busquedaController.actualizarAudiovisual()}" style="text-align: center;" class="btn btn-primary"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

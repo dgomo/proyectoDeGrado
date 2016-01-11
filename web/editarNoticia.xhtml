@@ -1,0 +1,25 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <div class="col-md-10 col-sm-8 col-xs-12">
+            <div class="row">
+                <div class="col-md-offset-1">
+                    <h:form rendered="#{utilControler.session}">
+                        <i><h3><h:messages id="mensajes" style="color:brown"/></h3></i>
+                        <h1><font size="6"><h:inputText value="#{noticiaController.evento.nombre}" title="Titulo" maxlength="90" required="true" class="form-control" label="Titulo"/></font></h1><br/>
+                        <img width="715" height="500" src="images/#{noticiaController.evento.imagen}">          
+                        </img>
+                        <br/><br/>
+                        <h2>SOBRE LA NOTICIA:</h2><br/>                        
+                        <h:inputTextarea value="#{noticiaController.evento.descripcion}" title="Descripción" required="true" class="form-control" rows="6" label="Descripcion"/>
+                        <h2><h:outputText value="#{noticiaController.formatDate(noticiaController.evento.fecha)}"/></h2>
+                        <h:commandButton value="Aceptar" rendered="#{utilControler.session}" action="#{noticiaController.actualizarNoticia()}" title="Aceptar" label="Aceptar" style="text-align: center;" class="btn btn-primary"/>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

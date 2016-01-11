@@ -1,0 +1,48 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <article id="main" class="container special">
+                    <h:form id="updateForm" rendered="#{utilControler.session}">                                
+                        <table columns="2" style="margin-left: 100px;float: left;margin-top: 0px" class="table">
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Modifica tu Correo en CKWEB" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-2 col-sm-6 ccol-xs-12 ontrol-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="E-Mail: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">@</div>
+                                        <h:inputText id="eMail" value="#{registroController.usuario.correo}" maxlength="40" validator="#{registroController.validate}"  pt:type="email" class="form-control" pt:placeholder="E-Mail" label="E-Mail"/>
+                                    </div>
+                                    <i><h3><h:message for="eMail" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Password: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputSecret id="password" value="#{registroController.usuario.contrasena}" maxlength="20" class="form-control" pt:placeholder="Password" label="Password"/>
+                                    <i><h3><h:message for="password" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-3 col-xs-12">
+                                    <h:commandButton value="Modificar" rendered="#{utilControler.session}" action="#{registroController.modificarInformacion()}"  class="btn btn-primary"/>
+                                </div>
+                            </div>
+                        </table>
+                    </h:form>
+                </article>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

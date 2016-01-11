@@ -1,0 +1,122 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+        <!-- INICIO DEL PANEL PRINCIPAL -->
+        <div class="col-md-10 col-sm-8 col-xs-12">
+            <!-- PRIMERA FILA DEL PANEL PRINCIPAL -->
+            <div class="row">
+                <!-- ARTÍCULO EN PANEL PRINCIPAL -->
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="contenedor-articulo">
+                        <div class="col-sm-offset-1">
+                            <div class="row">
+                                <h1><font size="6"><h:outputText value="¿Dónde nos Encontramos?" class="col-sm-9 control-label"/></font></h1><br/><br/><br/>
+                                <div id="map-canvas"></div>
+                                <hr>
+                                    <h:form>
+                                        <div class="col-sm-8 col-xs-12">
+                                            <div class="row form-group">
+                                                <div class="col-xs-6">
+                                                    <h:inputText id="nombre" value="#{mailController.nombre}" required="true" class="form-control" title="Nombre" maxlength="20" pt:placeholder="Nombre"></h:inputText>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h:inputText id="apellido" value="#{mailController.apellido}" required="true" class="form-control" title="Apellido" maxlength="20" pt:placeholder="Apellido"></h:inputText>
+                                                </div>
+                                            </div>
+                                            <div class="row form-group">
+                                                <div class="col-xs-6">
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">@</div>
+                                                        <h:inputText id="eMail" value="#{mailController.email}" required="true" pt:type="email" class="form-control" title="E-Mail" maxlength="50" validator="#{registroController.validate}" pt:placeholder="E-Mail"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <h:inputText id="phone" value="#{mailController.telefono}" required="true" title="Teléfono" class="form-control" maxlength="15" pt:placeholder="Teléfono"></h:inputText>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="row form-group">
+                                                 <div class="col-xs-12">
+                                                     <h:inputText id="web" value="" required="true" class="form-control" maxlength="30" pt:placeholder="Sitio Web"></h:inputText>
+                                                 </div>
+                                             </div>-->
+                                            <div class="row form-group">
+                                                <div class="col-xs-12">
+                                                    <h:inputTextarea value="#{mailController.comentario}" required="true" class="form-control" title="Comentarios" rows="6" pt:placeholder="Comentario"/>
+                                                </div>
+                                            </div><br/>
+                                            <div class="row form-group">
+                                                <div class="col-xs-12 col-sm-offset-9">
+                                                    <h:commandButton id="button" value="Enviar" title="Enviar Información" styleClass="button" action="#{mailController.enviarCorreo()}" style="text-align: center;" class="btn btn-primary"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </hr>
+                                <div class="col-sm-4 col-xs-12">
+                                    <address>
+                                        <strong>CKWEB</strong><br></br>
+                                        <span id="map-input">
+                                            Calle 10 # 3-16<br></br>
+                                            Bogotá D.C., Colombia<br></br>
+                                        </span>
+                                        <i class="fa fa-phone"></i> (57)(1) 2829491 ext: 111
+                                    </address>
+                                    <address>
+                                        <strong>Escríbanos</strong><br></br>
+                                        <a href="mailto:#">estacionckweb@fuga.gov.co</a>
+                                    </address> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN PRIMERA FILA DEL PANEL PRINCIPAL -->
+        </div>
+        <!-- FIN DEL PANEL PRINCIPAL -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+        <script>
+            var map;
+            var latLng = new google.maps.LatLng(4.5953509, -74.072528);
+            function initialize() {
+                var mapOptions = {
+                    zoom: 17,
+                    center: latLng
+                };
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                var cadenaInfo = '<div id="contenido">' +
+                        '<div id="marca"/>' +
+                        '<p><b>CKWEB</b></p>' +
+                        '<p><span style="color:blue">www.estacionckweb.net</span></p>' +
+                        '<p>(57)(1) 2829491 ext: 111</p>' +
+                        '<p>Calle 10 # 3 - 16</p>' +
+                        '<p>Bogotá D.C., Colombia</p>' +
+                        '</div>';
+                var infowindow = new google.maps.InfoWindow({
+                    content: cadenaInfo
+                });
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: 'CKWEB'
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+        <script src="scripts/vendor.js"></script>
+
+        <script src="scripts/plugins.js"></script>
+
+        <script src="scripts/main.js"></script>
+    </ui:define>
+</ui:composition>

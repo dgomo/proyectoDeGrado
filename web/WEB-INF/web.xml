@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    
+    <filter>
+        <filter-name>Pretty Filter</filter-name>
+        <filter-class>com.ocpsoft.pretty.PrettyFilter</filter-class>
+    </filter>
+    <filter-mapping> 
+        <filter-name>Pretty Filter</filter-name> 
+        <url-pattern>/*</url-pattern> 
+        <dispatcher>FORWARD</dispatcher> 
+        <dispatcher>REQUEST</dispatcher> 
+        <dispatcher>ERROR</dispatcher>
+    </filter-mapping>
+    
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Production</param-value>
+    </context-param>
+    <filter>
+        <filter-name>CKWebFiltro</filter-name>
+        <filter-class>com.CKWeb.Filtro.CKWebFiltro</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CKWebFiltro</filter-name>
+        <url-pattern>/ckw/*</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/index.xhtml</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404</location>
+    </error-page>
+    <ejb-ref>
+        <ejb-ref-name>ActividadBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWeb.Remote.ActividadBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ActividadBean1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWeb.Remote.ActividadBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>ActividadBean2</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWeb.Remote.ActividadBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean1</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean2</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean3</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean4</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean5</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>EventoBean6</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.EventoBeanRemote</remote>
+    </ejb-ref>
+    <ejb-ref>
+        <ejb-ref-name>TemaBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <remote>com.CKWebMulti.Beans.TemaBeanRemote</remote>
+    </ejb-ref>
+</web-app>

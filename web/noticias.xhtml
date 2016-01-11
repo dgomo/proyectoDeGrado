@@ -1,0 +1,60 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:jsf="http://java.sun.com/jsf"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <!-- INICIO DEL PANEL PRINCIPAL -->
+        <h1><font size="6"><h:outputText value="Últimas Noticias en CKWEB" class="col-sm-offset-3 col-sm-6 col-xs-12 control-label"/></font></h1>
+        <div class="col-md-8 col-sm-8 col-xs-10 col-sm-offset-1">
+            <!--  ENTRADA DE CONTENIDO -->
+            <br/><br/>            
+
+            <h:dataTable id="dataTable" var="item" value="#{noticiaController.resultados}" styleClass="table table-striped table-hover table-responsive">
+                <hr>
+                    <h:column class="active">
+                        <div class="archivo contenedor-entrada">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-8 col-xs-10">
+                                    <div class="col-sm-offset-1">
+                                        <p align="center">
+                                            <div class="contenedor-thumbnail">
+                                            <h:form>
+                                                <h:commandLink action="#{noticiaController.redireccionar(item)}">
+                                                    <img src="images/#{item.imagen}" width="320px" height="200px" data-toogle="tooltip" data-placement="bottom" title="#{item.nombre}"></img>       
+                                                </h:commandLink>
+                                            </h:form>
+                                            </div>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-10">
+                                    <div class="col-sm-offset-1">
+                                        <h2><font size="5"><h:outputText value="#{item.nombre}"/></font></h2><br/>
+                                        <i><font size="4"><p align="justify"><h:outputText value="#{noticiaController.formatNoticias(item.descripcion)}" /></p></font></i>
+                                        <h2><strong><h:outputText value="#{noticiaController.formatDate(item.fecha)}"/></strong></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:column>
+                </hr>
+            </h:dataTable>
+
+            <!-- Paginación de entradas -->
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-1 col-xs-8">
+                        <h:form><h:commandButton id="button1" value="← Ant" styleClass="button"  action="#{noticiaController.paginarAnt()}"  class="btn btn-primary"/></h:form>
+                    </div>
+                    <div class="col-sm-offset-9 col-sm-1">
+                        <h:form><h:commandButton id="button2" value="Sig →" styleClass="button" action="#{noticiaController.paginarSig()}" class="btn btn-primary"/></h:form>
+                    </div>  
+                </div>
+            </div>  
+        </div>
+        <!-- FIN DEL PANEL PRINCIPAL -->
+    </ui:define>
+</ui:composition>

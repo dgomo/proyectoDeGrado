@@ -1,0 +1,80 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <!-- INICIO DEL PANEL PRINCIPAL -->
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <!-- FILA DE LINEA DE TIEMPO -->
+            <div class="row">
+                <!-- LÍNEA DE TIEMPO -->
+                <div class="col-md-12">
+                    <div class="linea-de-tiempo">
+                        <p>
+                            <h:form>
+                                <div class="col-sm-offset-1 col-md-6">
+                                    <h1><h:outputLabel value="Seleccione el Año " class="control-label"/></h1>  
+                                    <h:selectOneMenu styleClass="menu" title="Selecciona un año" class="form-control" value="#{archivoController.year}" pt:placeholder="Seleccionar año">
+                                        <f:selectItems value="#{archivoController.menuY}"/>
+                                    </h:selectOneMenu>
+                                    <br/>
+                                    <hr></hr>
+                                    <h1><h:outputLabel value="Seleccione el Mes " class="control-label"/></h1>
+                                    <h:selectOneMenu styleClass="menu" title="Selecciona un mes" class="form-control" value="#{archivoController.mes}" pt:placeholder="Seleccionar año">
+                                        <f:selectItems value="#{archivoController.menuM}"/>
+                                    </h:selectOneMenu>
+                                    <br/>
+                                    <h:commandButton value="Consultar" title="Consultar" styleClass="button" action="#{archivoController.consultar()}" class="btn btn-primary"/><br/><br/>
+                                    <br/>
+                                </div>
+                            </h:form>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- FIN FILA -->
+
+            <!--  ENTRADA DE CONTENIDO -->
+            <div class="col-sm-offset-1">
+                <hr></hr><br/>
+                <h:dataTable id="dataTable" var="item" styleClass="table table-striped table-hover" value="#{archivoController.array}">
+                    <h:column>
+                        <div class="archivo contenedor-entrada">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-8 col-xs-12">
+                                    <div class="controles">
+                                        <div class="bg-primary borde-abajo">
+                                            <h:form>
+                                                <h:commandLink action="#{busquedaController.redireccionar(item)}"><i class="fa fa-play-circle fa-2x"></i></h:commandLink>
+                                            </h:form>
+                                        </div>
+                                        <div>
+                                            <img src="#{request.contextPath}/images/Logo_CKWEB.png" height="47px" width="47px"/>
+                                        </div>
+                                    </div>
+                                    <div class="contenedor-media">
+                                        <h:form>
+                                            <h:commandLink action="#{busquedaController.redireccionar(item)}">
+                                                <img src="http://img.youtube.com/vi/#{item.url}/hqdefault.jpg" alt="" class="img-responsive" title="#{item.nombre}"/>
+                                            </h:commandLink>
+                                        </h:form>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="contenedor-info">
+                                        <h3>#{item.nombre}</h3>
+                                        <p>#{archivoController.formatDescripcion(item.descripcion)}</p>
+                                        <p class="programacion"><strong>#{archivoController.formatDate(item.fecha)}</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </h:column>
+                </h:dataTable>
+            </div>
+        </div>
+        <!-- FIN DEL PANEL PRINCIPAL -->
+    </ui:define>
+</ui:composition>

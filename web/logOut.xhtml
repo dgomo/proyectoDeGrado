@@ -1,0 +1,51 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <br/>
+                <div class="wrapper style2">
+                    <article id="main" class="container special">
+                        <h:form rendered="#{utilControler.session}">
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Cerrando Sesión en CKWEB" class="col-sm-offset-1 col-sm-6 control-label"/></font></h1>
+                            </div>
+                            <br/><br/><br/>
+                            <div class="form-group">
+                                <h1><h:outputText value="¿Seguro que desea cerrar la sesión?" class="col-sm-offset-1 col-sm-6 control-label"/></h1>
+                            </div>
+                            <br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-1 col-xs-8">
+                                    <h:commandButton id="button" value="Aceptar" styleClass="button"  action="#{registroController.logout()}"  class="btn btn-primary" pt:type="button" pt:data-toggle="modal" pt:data-target="#myModal"/>
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title" id="myModalLabel">Estación CKWEB</h1>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <i><h2>Gracias por haber ingresado a nuestra plataforma.</h2></i> 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <h:commandButton id="button1" value="Salir" rendered="#{utilControler.session}" styleClass="button"  action="#{registroController.logout()}"  class="btn btn-primary"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <h:commandButton value="Cancelar" styleClass="button" action="/home" class="btn btn-primary"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </article>
+                </div>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

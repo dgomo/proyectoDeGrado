@@ -1,0 +1,28 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:define name="content">
+        <div class="col-md-10 col-sm-8 col-xs-12">
+            <div class="row">
+                <div class="col-md-offset-1 contenedor-articulo col-sm-offset-1">
+                    <h1><font size="6"><h:outputText value="#{busquedaController.audiovisual.nombre}"/></font></h1><br/>
+                    <div class="col-md-14">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe src="//player.vimeo.com/video/#{busquedaController.audiovisual.url}" width="880" height="560" frameborder="0"></iframe>
+                        </div>
+                    </div>
+                    <br/><br/>
+                    <h2>SOBRE EL VIDEO:</h2><br/>
+                    <font size="4"><p align="justify"><h:outputText value="#{busquedaController.audiovisual.descripcion}"/></p></font>
+                    <h2><h:outputText value="Publicado el #{busquedaController.formatDate(busquedaController.audiovisual.fecha)}"/></h2>
+                    <h:form>
+                        <h:commandButton value="Editar Video" rendered="#{utilControler.session}" title="Editar" action="/editarVideo" class="btn btn-primary" style="text-align: center;"/>
+                    </h:form>
+                    <br/><h1>COMENTARIOS: </h1>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

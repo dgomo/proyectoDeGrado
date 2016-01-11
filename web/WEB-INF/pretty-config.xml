@@ -1,0 +1,129 @@
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.3" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.3
+                                   		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.3.xsd">
+    
+    <url-mapping id="login">
+        <pattern value="/login" />
+        <view-id value="/faces/login.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="video">
+        <pattern value="/watch/1/#{busquedaController.id}"/>
+        <view-id value="/faces/verVideo.xhtml"/>
+        <action>#{busquedaController.findById()}</action>
+    </url-mapping>
+
+    <url-mapping id="video2">
+        <pattern value="/watch/2/#{busquedaController.id}"/>
+        <view-id value="/faces/verVideoVimeo.xhtml"/>
+        <action>#{busquedaController.findById()}</action>
+    </url-mapping>
+
+    <url-mapping id="home">
+        <pattern value="/home"/>
+        <view-id value="/faces/index.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="about">
+        <pattern value="/sobre-CKWeb"/>
+        <view-id value="/faces/sobre-ckweb.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="news">
+        <pattern value="/noticias"/>
+        <view-id value="/faces/noticias.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="file">
+        <pattern value="/foros"/>
+        <view-id value="/faces/foros.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="aliados">
+        <pattern value="/aliados"/>
+        <view-id value="/faces/aliados.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="contacto">
+        <pattern value="/contacto"/>
+        <view-id value="/faces/contacto.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="error">
+        <pattern value="/404"/>
+        <view-id value="/faces/error404.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="eventLive">
+        <pattern value="/ckw/eventLive"/>
+        <view-id value="/faces/crearEventLive.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="TipoUsuario">
+        <pattern value="/crearTipoUsuario"/>
+        <view-id value="/faces/crearTipoUsuario.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="subirVideo">
+        <pattern value="/subirVideo"/>
+        <view-id value="/faces/subirVideo.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="registrarFranja">
+        <pattern value="/registrarFranja"/>
+        <view-id value="/faces/registrarTema.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="modificarUsuario">
+        <pattern value="/modificarUsuario"/>
+        <view-id value="/faces/modificarUsuario.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="crearEvento">
+        <pattern value="/crearNoticia"/>
+        <view-id value="/faces/crearEvento.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="logOut">
+        <pattern value="/logout"/>
+        <view-id value="/faces/logOut.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="registrar">
+        <pattern value="/registrar"/>
+        <view-id value="/faces/registrar.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="recuperarContraseña">
+        <pattern value="/recuperarContrasena"/>
+        <view-id value="/faces/recuperarContrasena.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="resultadosBusqueda">
+        <pattern value="/resultadosBusqueda"/>
+        <view-id value="/faces/resultados-busqueda.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="verNoticia">
+        <pattern value="/verNoticia"/>
+        <view-id value="/faces/verNoticia.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="editarVideo">
+        <pattern value="/editarVideo"/>
+        <view-id value="/faces/editarVideo.xhtml"/>
+    </url-mapping>
+    
+    
+    
+    <url-mapping id="cambiarContraseña">
+        <pattern value="/cambiarContraseña"/>
+        <view-id value="/faces/cambiarContraseña.xhtml"/>
+    </url-mapping>
+    
+    <url-mapping id="archivo">
+        <pattern value="/archivo"/>
+        <view-id value="/faces/archivo.xhtml"/>
+    </url-mapping>
+</pretty-config>

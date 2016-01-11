@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="es"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/es_LA/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <meta charset="utf-8"/>
+        <title>CKWeb</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="apple-touch-icon" sizes="57x57" href="#{request.contextPath}/apple-touch-icon-57x57.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="#{request.contextPath}/apple-touch-icon-114x114.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="#{request.contextPath}/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="144x144" href="#{request.contextPath}/apple-touch-icon-144x144.png"/>
+        <link rel="apple-touch-icon" sizes="60x60" href="#{request.contextPath}/apple-touch-icon-60x60.png"/>
+        <link rel="apple-touch-icon" sizes="120x120" href="#{request.contextPath}/apple-touch-icon-120x120.png"/>
+        <link rel="apple-touch-icon" sizes="76x76" href="#{request.contextPath}/apple-touch-icon-76x76.png"/>
+        <link rel="apple-touch-icon" sizes="152x152" href="#{request.contextPath}/apple-touch-icon-152x152.png"/>
+        <link rel="icon" type="image/png" href="#{request.contextPath}/favicon-196x196.png" sizes="196x196"/>
+        <link rel="icon" type="image/png" href="#{request.contextPath}/favicon-160x160.png" sizes="160x160"/>
+        <link rel="icon" type="image/png" href="#{request.contextPath}/favicon-96x96.png" sizes="96x96"/>
+        <link rel="icon" type="image/png" href="#{request.contextPath}/favicon-16x16.png" sizes="16x16"/>
+        <link rel="icon" type="image/png" href="#{request.contextPath}/favicon-32x32.png" sizes="32x32"/>
+        <meta name="msapplication-TileColor" content="#da532c"/>
+        <meta name="msapplication-TileImage" content="#{request.contextPath}/mstile-144x144.png"/>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/styles/vendor.css" media="all"/>
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/styles/main.css" media="all"/>
+
+        <script src="#{request.contextPath}/scripts/vendor/modernizr.js"></script>
+
+        <link href="#{request.contextPath}/styles/calendario.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="#{request.contextPath}/scripts/calendario.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            MesSeleccionado = 0;
+        </script>
+        <script>
+            function EnterSubmit(keyCode) {
+                if (keyCode === 13) {
+            #{busquedaController.buscar()}
+                }
+            }
+        </script>
+
+        <f:facet name="first">
+            <h:outputStylesheet name="#{request.contextPath}/styles/main.css" />
+        </f:facet>
+    </h:head>
+    <h:body>
+        <!-- BARRA DE NAVEGACIÓN  -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- NAVEGACIÓN MÓVILES  -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#busquedaMenu">
+                        <span class="sr-only">Desplegar buscador</span>
+                        <i class="fa fa-search fa-lg"></i>
+                    </button>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topMenu">
+                        <span class="sr-only">Desplegar menú</span>
+                        <i class="fa fa-bars fa-lg"></i>
+                    </button>
+                </div>
+
+                <!-- NAVEGACIÓN ESCRITORIO  -->
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="collapse navbar-collapse" id="topMenu">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#{request.contextPath}#{utilControler.url1}">#{utilControler.nombre1}}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url2}">#{utilControler.nombre2}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url3}">#{utilControler.nombre3}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url4}">#{utilControler.nombre4} #{noticiaController.findByDate()} #{noticiasController.findByDate()}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url5}">#{utilControler.nombre5} #{aliadoController.findAll()}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url6}">#{utilControler.nombre6}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url7}">#{utilControler.nombre7}</a>
+                                </li>
+                                <li><a href="#{request.contextPath}#{utilControler.url8}">#{utilControler.nombre8}</a>
+                                </li>                              
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2 navbar-right">
+                        <div class="collapse navbar-collapse" id="busquedaMenu">
+                            <h:form class="navbar-form form-group" role="search" id="busc">
+                                <div class="input-group input-group-sm pull-right">
+                                    <h:inputText class="form-control input-ckweb" onkeypress="EnterSubmit(event.keyCode);" value="#{busquedaController.palabra}"/>
+                                    <span class="input-group-btn">
+                                        <h:commandLink id="Searc" class="btn btn-primary" type="Submit" action="#{busquedaController.buscar()}"><i class="fa fa-search fa-lg" title="Buscar"></i></h:commandLink>
+                                    </span>                                    
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container -->
+        </nav>
+        <!-- FIN DE BARRA DE NAVEGACION -->
+
+        <!-- ENCABEZADO - LOGO Y REPRDUCTOR -->
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-2 col-sm-6 col-xs-4">
+                        <a href="#{request.contextPath}/home">
+                            <img class="logo" src="#{request.contextPath}/images/Logo_CKWEB.png" alt="CKWEB" data-toogle="tooltip" data-placement="bottom" title="CKWEB"/>
+                        </a>
+                    </div>
+                    <!-- MIGAS -->
+                    <div class="col-md-6 hidden-xs hidden-sm contenedor-migas">
+                        <ol class="breadcrumb hidden">
+                            <li>Inicio</li>
+                        </ol>
+                    </div>
+
+                    <!-- REPRDUCTOR -->
+                    <div class="col-md-4 col-sm-6 col-xs-8 reproductor">
+                        <div id="carrusel-en-directo" class="carousel slide">
+                            <div class="flechas-reproductor left hidden-xs">
+                                <a href="#carrusel-en-directo" data-slide="prev"><i class="fa fa-angle-double-left fa-lg"></i></a>
+                            </div>
+                            <div class="flechas-reproductor right hidden-xs">
+                                <a href="#carrusel-en-directo" data-slide="next"><i class="fa fa-angle-double-right fa-lg"></i></a>
+                            </div>
+                            <!-- Items Carrusel -->
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <div class="row">
+                                        <div class="col-md-3 col-xs-4 boton-reproductor text-right">
+                                            <a href="faces/en-directo.xhtml"><i class="fa fa-play-circle fa-3x"></i></a>
+                                        </div>
+                                        <div class="col-md-9 col-xs-8 texto-reproductor">
+                                            <p><span>En directo:</span>#{streamingController.audiovisual.nombre}</p>
+                                            <p class="horario">#{streamingController.audiovisual.cedula.nombre}</p>
+                                            <p><span>En directo:</span></p>
+                                            <p class="horario">16:30 a 18:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-xs-3 boton-reproductor text-right">
+                                            <a href="faces/en-directo.xhtml"><i class="fa fa-volume-up fa-3x"></i></a>
+                                        </div>
+                                        <div class="col-xs-9 texto-reproductor">
+                                            <p><span>En directo:</span> Amet Pudi cone aut doluptatem fuga.</p>
+                                            <p class="horario">14:00 a 16:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- FIN ENCABEZADO -->
+
+        <!-- CUERPO DE LA PÁGINA -->
+        <div class="cuerpo">
+            <div class="container">
+                <div class="row">
+                    <!-- INICIO DE LA BARRA LATERAL IZQUIERDA -->
+                    <div class="col-md-2 col-sm-4 col-xs-12">
+                        <div class="barraLateral">
+                            <!-- MENU LATERAL -->
+                            <div class="menuLateral">
+                                <div class="menuGroup">
+                                    <div class="botonLateral bg-primary" data-toggle="collapse" data-target="#menuTemas">
+                                        <div class="texto-boton-lateral">Franjas</div>
+                                        <div class="icono-boton-lateral"><i class="fa fa-chevron-down fa-fw"></i>
+                                        </div>
+                                    </div>
+                                    <div id="menuTemas" class="collapse">
+                                        <h:form>
+                                            <h:dataTable id="dataTableNotice1" var="item" value="#{audioVisualController.temasRelacion}" styleClass="table table-striped">
+                                                <h:column>
+                                                    <i><strong><h:commandLink value="#{item.nombre}" action="#{busquedaFranjaController.redirigir(item)}"/></strong></i>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </h:form>
+                                    </div>
+                                </div>
+
+                                <div class="menuGroup">
+                                    <div class="botonLateral bg-primary" data-toggle="collapse" data-target="#calendario">
+                                        <div class="texto-boton-lateral">Calendario</div>
+                                        <div class="icono-boton-lateral"><i class="fa fa-chevron-down fa-fw"></i>
+                                        </div>
+                                    </div>
+
+                                    <!-- WIDGET CALENDARIO. NOTA: ES UN EJEMPLO SOLAMENTE falta implementarlo -->
+                                    <div class="collapse widget-calendario" id="calendario">
+                                        <!-- <h3>Calendario de Actividades</h3> -->
+                                        <br/>
+                                        <div id="boxcalendario">
+                                            <script type="text/javascript">CrearCalendario(0);</script>
+                                        </div>
+                                        <br/>
+                                        <center>
+                                            <h3>
+                                                <input type="button" value="◄" onclick="CrearCalendario(--MesSeleccionado)" />
+                                                <input type="button" value="Actual" onclick="MesSeleccionado = 0;
+                                                        CrearCalendario(MesSeleccionado)" />
+                                                <input type="button" value="►" onclick="CrearCalendario(++MesSeleccionado)" />
+                                            </h3>
+                                        </center>
+                                        <br/>
+                                    </div>
+                                </div>
+
+                                <div class="menuGroup">
+                                    <a href="#{request.contextPath}/noticias">
+                                        <div class="botonLateral bg-primary">
+                                            <div class="texto-boton-lateral">Noticias
+                                            </div>
+                                            <div class="icono-boton-lateral"><i class="fa fa-plus fa-fw"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <!--WIDGET DE NOTICIAS -->
+                                    <div class="widget-noticias">
+                                        <div class="noticia">
+                                            <h:dataTable id="dataTableNotice" var="item" value="#{noticiasController.lateral}" styleClass="table table-striped table-bordered">
+                                                <h:column>
+                                                    <strong><h:outputText value="#{item.nombre}"/></strong>
+                                                    <i><p align="justify"><h:outputText value="#{noticiasController.formatDescripcion(item.descripcion)}" /></p></i>
+                                                    <strong><h:outputText value="#{noticiasController.formatDate(item.fecha)}"/></strong>
+                                                </h:column>
+                                            </h:dataTable>
+                                        </div>
+                                    </div>
+                                    <!-- FIN WIDGET DE NOTICIAS -->
+                                </div>
+                                <div class="manuGroup">
+                                    <!-- WIDGET DE CORREO -->
+                                    <div class="widget-lista-de-correo bg-primary">                                 
+                                        <h4><p align="justify">Registrate, Ingresa y Disfruta de todo nuestro contenido multimedia.</p></h4>                               
+                                    </div>
+                                    <!-- FIN WIDGET DE CORREO -->
+
+                                    <!-- WIDGET DE SOCIALES -->
+                                    <div class="widget-sociales">
+                                        <i><h3>#{utilControler.fechaIndex()}</h3></i>
+                                        <h3><i>Síguenos en nuestras redes sociales:</i></h3>
+                                        <a href="https://www.facebook.com/ESTACIONCKWEB" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Facebook">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="https://twitter.com/EstacionCKWEB" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Twitter">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="http://vimeo.com/estacionckweb" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Vimeo">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                <i class="fa fa-vimeo-square fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a href="http://www.youtube.com/user/estacionckweb" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="YouTube">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-circle fa-stack-2x"></i>
+                                                <i class="fa fa-youtube fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </div>               
+                                </div>
+                                <!-- FIN WIDGET DE SOCIALES  -->
+                                <div class="form-group"> 
+                                    <br/><br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FIN DE LA BARRA LATERAL IZQUIERDA -->
+
+                    <!-- INICIO DEL PANEL PRINCIPAL -->
+                    <ui:insert name="content">
+                        <div class="col-md-10 col-sm-8 col-xs-12 home">
+                            <div class="row">
+                                <h:dataTable id="dataTable" var="item" value="#{audioVisualController.filas}" styleClass="table table-striped table-hover">
+                                    <hr>
+                                        <h:column class="active">
+                                            <div class="archivo contenedor-entrada">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-sm-4 col-xs-10">
+                                                        <p align="center">
+                                                            <div class="controles">
+                                                                <div class="bg-primary borde-abajo">
+                                                                    <h:form>
+                                                                        <h:commandLink action="#{busquedaController.redireccionar(item.audio1)}"><i class="fa fa-play-circle fa-2x"></i></h:commandLink>
+                                                                    </h:form>
+                                                                </div>
+                                                                <div>
+                                                                    <img src="#{request.contextPath}/images/Logo_CKWEB.png" height="47px" width="47px"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="contenedor-media">
+                                                                <h:form>
+                                                                    <h:commandLink action="#{busquedaController.redireccionar(item.audio1)}">
+                                                                        <img  width="300" height="200" src="http://img.youtube.com/vi/#{item.audio1.url}/hqdefault.jpg" data-toogle="tooltip" data-placement="bottom" title="#{item.audio1.nombre}"></img>
+                                                                    </h:commandLink>
+                                                                </h:form>
+                                                            </div>
+                                                            <h2><font size="5"><h:outputText value="#{item.audio1.nombre}"/></font></h2><br/>
+                                                            <i><font size="3"><p align="justify"><h:outputText value="#{busquedaController.formatDescripcion(item.audio1.descripcion)}"/></p></font></i>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-xs-10">
+                                                        <p align="center">
+                                                            <div class="controles">
+                                                                <div class="bg-primary borde-abajo">
+                                                                    <h:form>
+                                                                        <h:commandLink action="#{busquedaController.redireccionar(item.audio2)}"><i class="fa fa-play-circle fa-2x"></i></h:commandLink>
+                                                                    </h:form>
+                                                                </div>
+                                                                <div>
+                                                                    <img src="#{request.contextPath}/images/Logo_CKWEB.png" height="47px" width="47px"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="contenedor-media">
+                                                                <h:form>
+                                                                    <h:commandLink action="#{busquedaController.redireccionar(item.audio2)}">
+                                                                        <img  width="300" height="200" src="http://img.youtube.com/vi/#{item.audio2.url}/hqdefault.jpg" data-toogle="tooltip" data-placement="bottom" title="#{item.audio2.nombre}">
+                                                                        </img>
+                                                                    </h:commandLink>
+                                                                </h:form>
+                                                            </div>
+                                                            <h2><font size="5"><h:outputText value="#{item.audio2.nombre}"/></font></h2><br/>
+                                                            <i><font size="3"><p align="justify"><h:outputText value="#{busquedaController.formatDescripcion(item.audio2.descripcion)}"/></p></font></i>
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-md-4 col-sm-4 col-xs-10">
+                                                        <p align="center">
+                                                            <div class="controles">
+                                                                <div class="bg-primary borde-abajo">
+                                                                    <h:form>
+                                                                        <h:commandLink action="#{busquedaController.redireccionar(item.audio3)}"><i class="fa fa-play-circle fa-2x"></i></h:commandLink>
+                                                                    </h:form>
+                                                                </div>
+                                                                <div>
+                                                                    <img src="#{request.contextPath}/images/Logo_CKWEB.png" height="47px" width="47px"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="contenedor-media">
+                                                                <h:form>
+                                                                    <h:commandLink action="#{busquedaController.redireccionar(item.audio3)}">
+                                                                        <img  width="300" height="200" src="http://img.youtube.com/vi/#{item.audio3.url}/hqdefault.jpg" data-toogle="tooltip" data-placement="bottom" title="#{item.audio3.nombre}">
+                                                                        </img>
+                                                                    </h:commandLink>
+                                                                </h:form>
+                                                            </div>
+                                                            <h2><font size="5"><h:outputText value="#{item.audio3.nombre}"/></font></h2><br/>                                                    
+                                                            <i><font size="3"><p align="justify"><h:outputText value="#{busquedaController.formatDescripcion(item.audio3.descripcion)}"/></p></font></i>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:column>
+                                    </hr>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </ui:insert>
+                    <!-- FIN DEL PANEL PRINCIPAL -->
+                </div>
+                <!-- FIN ROW -->
+            </div>
+            <!-- FIN CONTAINER -->
+        </div>
+        <!-- FIN DEL CUERPO -->
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-3 col-xs-6">
+                        <div class="pull-left">
+                            <ul class="footer-menu">
+                                <div class="form-group">
+                                    <h2>#{utilControler.recuperarUsuario()}</h2>
+                                    <i><h3><font style="color: blue"><h:form><h:commandLink rendered="#{utilControler.session}" value="Modificar Información" action="/modificarUsuario"/></h:form></font>                                    
+                                            <h:form><h:commandLink rendered="#{utilControler.session}" value="Cambiar Contraseña" action="/cambiarContraseña"/></h:form></h3></i>                                    
+                                </div>
+                                <li><h3>Desarrolladores:</h3>                                 
+                                    <i><h4>Diego Manuel Sanabria Gomez
+                                            <a href="https://www.facebook.com/dgomo" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Facebook">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="https://twitter.com/DiegoSGomez21" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Twitter">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a></h4></i>                               
+                                    <i><h4>Juan Sebastian Vega Guarin
+                                            <a href="https://www.facebook.com/sebastian.vega.3551" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Facebook">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                            <a href="https://twitter.com/Juan_Sebas94" class="text-muted" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Twitter">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                            </a>
+                                        </h4></i>                                   
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-3 col-xs-6">
+                        <div class="pull-right">
+                            <div class="footer-logos">
+                                <a href="http://www.fgaa.gov.co/" target="_blank" data-toogle="tooltip" data-placement="bottom" title="FUGA">
+                                    <img src="#{request.contextPath}/images/Logo_FUGA.png" alt="FUGA" />
+                                </a>
+                                <a href="http://www.ucentral.edu.co/" target="_blank" data-toogle="tooltip" data-placement="bottom" title="Universidad Central">
+                                    <img src="#{request.contextPath}/images/logosimbolo-ucentral-v2-large.png" alt="Universidad Central" />
+                                </a>
+                                <a href="#" data-toogle="tooltip" title="Bogotá Humana">
+                                    <img src="#{request.contextPath}/images/Logo_BtaHumana.png" alt="Bogotá Humana"/>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="#{request.contextPath}/scripts/vendor.js"></script>
+
+        <script src="#{request.contextPath}/scripts/plugins.js"></script>
+
+        <script src="#{request.contextPath}/scripts/main.js"></script>
+
+    </h:body>
+</html>

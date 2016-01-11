@@ -1,0 +1,48 @@
+#boxcalendario .tabla {
+border-collapse:separate;
+border-spacing:3px;
+//background:#def;
+//margin:0px auto 0px;
+//border:1px solid #ccc;
+}
+
+#boxcalendario .encabezado {
+color:#000;
+font-weight:bold;
+font-size:1.3em;
+text-align:center;
+padding:3px;
+}
+
+#boxcalendario .celdaDiaSemana {
+padding:3px;
+color:#000;
+font-weight:bold;
+text-align:center;
+}
+
+#boxcalendario .diacita {
+font-weight:bold;
+color:#f00;
+}
+
+#boxcalendario .hoy {
+background:#c4e3f3;
+padding:2px;
+text-align:center;
+border:1px solid #ccc;
+}
+
+#boxcalendario .celda {
+background:#eee;
+padding:2px;
+text-align:center;
+border:1px solid #ccc;
+}
+
+#boxcalendario .celdacita {
+background:#eee;
+padding:2px;
+text-align:center;
+border:1px solid #f00;
+}

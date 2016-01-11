@@ -1,0 +1,138 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <div class="col-md-6 col-sm-6 col-xs-12 foros">
+                    <article id="main" class="container special">
+                        <h:form id="recuperarForm">
+                            <table columns="2" style="margin-left: 100px;float: left;margin-top: 0px" class="table">
+                                <div class="form-group">
+                                    <h1><font size="6"><h:outputText value="Registrate Ahora en CKWEB" class="col-sm-offset-3 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                    <br/><br/><br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></h3></i>
+                                </div>
+                                <br/>                          
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Cedula: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="cedula" value="#{registroController.usuario.cedula}"  title="Cedula" maxlength="20" required="true" class="form-control" requiredMessage="Error en la Cedula" pt:placeholder="Cedula" label="Cedula">
+                                            <f:validateLength minimum="4"/>
+                                            <f:ajax event="blur" listener="#{registroController.findByCedula()}" execute="cedula" render="message"/>
+                                        </h:inputText>
+                                        <i><h3><h:message for="cedula" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Nombre: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="nombre" value="#{registroController.usuario.nombre}" title="Nombre" maxlength="20" required="true" class="form-control" requiredMessage="Error en el Nombre" pt:placeholder="Nombre" label="Nombre">
+                                            <f:validateLength minimum="4"/>
+                                        </h:inputText>
+                                        <i><h3><h:message for="nombre" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Apellido: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="apellido" value="#{registroController.usuario.apellido}" title="Apellido" maxlength="20" required="true" class="form-control" requiredMessage="Error en el Apellido" pt:placeholder="Apellido" label="Apellido">
+                                            <f:validateLength minimum="4"/>
+                                        </h:inputText>
+                                        <i><h3><h:message for="apellido" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>      
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="NickName: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="nickName" value="#{registroController.usuario.nickname}" title="NickName" maxlength="20" required="true" class="form-control" pt:placeholder="NickName" label="NickName">
+                                            <f:validateLength minimum="4"/>
+                                            <f:ajax event="blur" listener="#{registroController.findByNickName()}" execute="nickName" render="message"/>
+                                        </h:inputText>
+                                        <i><h3><h:message for="nickName" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Password: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputSecret id="password" value="#{registroController.usuario.contrasena}" maxlength="20" title="Password" class="form-control" pt:placeholder="Password" label="Password">
+                                            <f:validateLength minimum="5"/>
+                                        </h:inputSecret>
+                                        <i><h3><h:message for="password" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="E-Mail: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">@</div>
+                                            <h:inputText id="eMail" value="#{registroController.usuario.correo}" maxlength="40" title="E-Mail" required="true" pt:type="email" class="form-control" validator="#{registroController.validate}" pt:placeholder="E-Mail" label="E-Mail">
+                                                <f:validateLength minimum="10"/>
+                                            </h:inputText>
+                                        </div>
+                                        <i><h3><h:message for="eMail" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Fecha de Nacimiento aaaa-mm-dd: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="dates" value="#{registroController.fechaCenvertir}" pt:type="date" title="Fecha de Nacimiento" required="true" class="form-control" pt:placeholder="Fecha de Nacimiento" label="Fecha">
+                                        </h:inputText>
+                                        <i><h3><h:message for="dates" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Tipo de Usuario: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="tipo" value="#{registroController.tipoUsuario}"  class="form-control" pt:placeholder="Tipo de Usuario">
+                                            <f:ajax event="blur" listener="#{registroController.findByNombre()}" execute="tipo" render="message"/>
+                                        </h:inputText>
+                                        <i><h3><h:message for="tipo" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/><br/>                               
+                                <div class="form-group">
+                                    <h2><strong><h:outputLabel value="Pregunta de Seguridad: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:selectOneMenu  id="question" value="#{registroController.pregunta.pregunta}" styleClass="menu" title="Escoje tu Pregunta Favorita" class="form-control" pt:placeholder="Pregunta de Seguridad">
+                                            <f:selectItem id="item1" itemLabel="¿Cuál es tu película favorita?" itemValue="¿Cuál es tu película favorita?" />
+                                            <f:selectItem id="item2" itemLabel="¿Cuál es tu canción favorita?" itemValue="¿Cuál es tu canción favorita?" />
+                                            <f:selectItem id="item3" itemLabel="¿Cuál fue el barrio donde creciste?" itemValue="¿Cuál fue el barrio donde creciste?" />
+                                            <f:selectItem id="item4" itemLabel="¿Cuál es tu libro favorito?" itemValue="¿Cuál es tu libro favorito?" />
+                                            <f:selectItem id="item5" itemLabel="¿Cuál es tu color favorito?" itemValue="¿Cuál es tu color favorito?" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                <br/><br/><br/>
+                                <div class="form-group">                                    
+                                    <h2><strong><h:outputLabel value="Respuesta de Seguridad: *" class="col-sm-offset-2 col-sm-2 col-xs-12 control-label"/></strong></h2>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <h:inputText id="answer" value="#{registroController.pregunta.respuesta}" title="Respuesta de Seguridad" maxlength="20" required="true" class="form-control" pt:placeholder="Respuesta de Seguridad" label="Respuesta">
+                                            <f:validateLength minimum="4"/>
+                                        </h:inputText>
+                                        <i><h3><h:message for="answer" style="color:brown"/></h3></i>
+                                    </div>
+                                </div>
+                                <br/><br/><br/><br/><br/>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-5 col-sm-3 col-xs-12">
+                                        <h:commandButton id="button" value="Registrarme" title="Registrar Usuario" styleClass="button" action="#{registroController.registrar()}" style="text-align: center;" class="btn btn-primary"/>
+                                    </div>
+                                </div>
+                            </table>
+                        </h:form>
+                    </article>
+                </div>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

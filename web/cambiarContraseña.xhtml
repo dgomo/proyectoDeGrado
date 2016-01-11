@@ -1,0 +1,58 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <article id="main" class="container special">
+                    <h:form id="cambiarForm" rendered="#{utilControler.session}">                                      
+                        <div class="form-group">
+                            <h1><font size="6"><h:outputText value="Cambiar la Contraseña en CKWEB" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                            <br/><br/><br/><br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></h3></i>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <h2><strong><h:outputLabel value="Contraseña Actual: *" class="col-sm-offset-2 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                            <div class="col-sm-3 col-xs-12">
+                                <h:inputSecret id="actualConfirm" required="true" value="#{registroController.actualContraseña}" title="Contraseña Actual" maxlength="20" pt:type="text" requiredMessage="Error en la Contraseña Actual" class="form-control" pt:placeholder="Contraseña Actual" label="Contraseña Actual"/>
+                                <i><h3><h:message for="actualConfirm" style="color:brown" /></h3></i>
+                            </div>
+                        </div>                                
+                        <br/>
+                        <div class="form-group">
+                            <h2><strong><h:outputLabel value="Nueva Contraseña: *" class="col-sm-offset-2 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">*</div>
+                                    <h:inputSecret id="newContra" required="true" value="#{registroController.nuevaContraseña}" title="Nueva Contraseña" maxlength="20" class="form-control" pt:placeholder="Nueva Contraseña" requiredMessage="Error en la Contraseña Nueva" label="Nueva Contraseña"/>
+                                </div>
+                                <i><h3><h:message for="newContra" style="color:brown" /></h3></i>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <h2><strong><h:outputLabel value="Confirmar Contraseña: *" class="col-sm-offset-2 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="input-group">
+                                    <div class="input-group-addon">*</div>
+                                    <h:inputSecret id="confirContra" required="true" value="#{registroController.confirmContraseña}" title="Confirmar Contraseña" maxlength="20" class="form-control" pt:placeholder="Confirmar Contraseña" requiredMessage="Error al Confirmar Contraseña" label="Confirmar Contraseña"/>
+                                </div>
+                                <i><h3><h:message for="confirContra" style="color:brown" /></h3></i>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/><br/>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5 col-sm-3 col-xs-12">
+                                <h:commandButton value="Cambiar" rendered="#{utilControler.session}" action="#{registroController.cambiarContraseña()}" title="Cambiar Contraseña" style="text-align: center;" class="btn btn-primary"/>
+                            </div>
+                        </div>
+                    </h:form>
+                </article>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

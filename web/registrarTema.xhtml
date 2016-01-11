@@ -1,0 +1,64 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <article id="main" class="container special">
+                        <h:form id="registrarTema-form" class="form-group" rendered="#{utilControler.session}">
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Crea una Nueva Franja en CKWEB" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 1" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Nombre de la Franja: *" class="col-sm-offset-1 col-sm-3 col-xs-12control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="nombre" value="#{temaController.tema.nombre}" title="Nombre" maxlength="60" required="true" class="form-control" pt:placeholder="Nombre" label="Nombre"/>
+                                    <i><h3><h:message for="nombre" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Descripción de la Franja: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputTextarea id="descripcion" value="#{temaController.tema.descripcion}" title="Descripción" required="true" class="form-control" rows="6" pt:placeholder="Descripción" label="Descripcion"/>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/><br/><br/>
+                            <div class="form-group">
+                                <br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 2" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><p align="justify"><h:outputText value="Escribe todos los Tag a los cuales quieres relacionar la Nueva Franja, estos Tag van separados por una simple coma y al finalizar dar click en ( Almacenar Tag )" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i><br/>
+                                <br/><h2><strong><h:outputLabel value="Tag: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="tag" value="#{temaController.palabra}" class="form-control" pt:placeholder="Tag" label="Tag"/>
+                                    <i><h3><h:message for="tag" style="color:brown"/></h3></i>
+                                    <br/>
+                                    <h:commandButton value="Almacenar Tag" action="#{temaController.addTag()}" title="Almacenar" class="btn btn-info" style="text-align: center;"/>
+                                    <h:dataTable id="tags" var="item" value="#{temaController.tags}" styleClass="table table-striped table-hover">
+                                        <h:column>
+                                            <p><font size="3"><i><h:outputText value="#{item}" class="col-sm-5 control-label"/></i></font></p>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </div>   
+                            <br/><br/>
+                            <br/><br/>
+                            <br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-3 col-xs-12">
+                                    <h:commandButton value="Registrar Tema" rendered="#{utilControler.session}" title="Registrar" action="#{temaController.registrarTema()}" class="btn btn-primary" style="text-align: center;"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </article>
+                </div>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

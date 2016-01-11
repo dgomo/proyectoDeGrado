@@ -1,0 +1,68 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:jsf="http://java.sun.com/jsf"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <article id="main" class="container special">
+                        <h:form id="formCreate" enctype="multipart/form-data" rendered="#{utilControler.session}"> 
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Registrar Aliado en CKWEB" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 1" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Titulo del Aliado: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="titulo" value="#{aliadoController.nombre}" title="Titulo" required="true" class="form-control" pt:placeholder="Titulo del Aliado" label="Titulo">
+                                    </h:inputText>
+                                    <i><h3><h:message for="titulo" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Descripción del Aliado: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputTextarea value="#{aliadoController.descripcion}" title="Descripción" required="true" class="form-control" rows="6" pt:placeholder="Descripción" label="Descripcion"/>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/><br/><br/><br/><br/>
+                            <font style="color: darkred"><i><h1><h:outputText value="Paso 2" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                            <br/><i><h3><p align="justify"><h:outputText value="En esta parte se adiciona la url del aliado correspondiente con cada detalle como se muestra a continuación ej. (https://www.google.com.co/)" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i><br/><br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Url del Aliado: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="url" value="#{aliadoController.url}" title="Url" pt:type="url" required="true" class="form-control" pt:placeholder="Url del Aliado" label="Url">
+                                    </h:inputText>
+                                    <i><h3><h:message for="url" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/>
+                            <font style="color: darkred"><i><h1><h:outputText value="Paso 3" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                            <br/><i><h3><p align="justify"><h:outputText value="En esta parte se adiciona la imagen correspondiente a cada aliado" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i><br/>                
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Imagen del Aliado: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputFile id="file" value="#{aliadoController.fileUpload}" title="Imagen" class="form-control" pt:placeholder="Imagen" label="Imagen"/>
+                                    <i><h3><h:message for="file" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-1 col-xs-12">                                           
+                                    <h:commandButton id="button" value="Registrar Aliado" rendered="#{utilControler.session}" title="Registrar" styleClass="button" action="#{aliadoController.llamar()}" style="text-align: center;" class="btn btn-primary"/>
+                                </div>                                        
+                            </div>                                    
+                        </h:form>
+                    </article>
+                </div>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>

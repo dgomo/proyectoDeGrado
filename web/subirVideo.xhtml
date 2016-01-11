@@ -1,0 +1,89 @@
+<ui:composition template="/index.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content"> 
+        <f:view contentType="text/html" >
+            <h:body class="homepage">
+                <div class="col-md-8 col-sm-8 col-xs-12 foros">
+                    <article id="main" class="container special">
+                        <h:form id="createVideo" class="form-group" rendered="#{utilControler.session}">                                    
+                            <div class="form-group">
+                                <h1><font size="6"><h:outputText value="Comparte tus Ideas en CKWEB" class="col-sm-offset-2 col-sm-6 col-xs-12 control-label"/></font></h1>
+                                <br/><br/><br/><h2><h:outputText value="Sube un Archivo" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h2>
+                                <br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 1" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><h:outputText value="Los campos con (*) son obligatorios" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h3></i>
+                            </div>
+                            <br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Nombre del Contenido: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="nombre" value="#{audioVisualController.audiovisual.nombre}" title="Nombre" maxlength="200" required="true" class="form-control" pt:placeholder="Nombre" label="Nombre"/>
+                                    <i><h3><h:message for="nombre" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/>
+                            <div class="form-group">
+                                <h2><strong><h:outputLabel value="Descripción del Contenido: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputTextarea value="#{audioVisualController.audiovisual.descripcion}" title="Descripción" required="true" class="form-control" rows="6" pt:placeholder="Descripción" label="Descripcion"/>
+                                </div>
+                            </div>
+                            <br/><br/><br/><br/><br/><br/>
+                            <div class="form-group">
+                                <br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 2" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><p align="justify"><h:outputText value="En esta parte digitamos el Codigo del video correspondiente que queremos traer de Youtube ej.( VCNO6Oa5kAg )" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i><br/>
+                                <h2><strong><h:outputLabel value="Url: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="url" value="#{audioVisualController.audiovisual.url}" title="Url" required="true" class="form-control" pt:placeholder="Url" label="Url"/>
+                                    <i><h3><h:message for="url" style="color:brown"/></h3></i>
+                                </div>
+                            </div>
+                            <br/><br/>                   
+                            <div class="form-group">
+                                <br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 3" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><p align="justify"><h:outputText value="Escribe todos los Tag a los cuales quieres relacionar el Nuevo Archivo, estos Tag van separados por una simple coma y al finalizar dar click en ( Almacenar Tag )" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i><br/><br/>
+                                <br/><h2><strong><h:outputLabel value="Tag: *" class="col-sm-offset-1 col-sm-3 col-xs-12 control-label"/></strong></h2>
+                                <div class="col-sm-3 col-xs-12">
+                                    <h:inputText id="tag" value="#{audioVisualController.palabra}" class="form-control" pt:placeholder="Tag" label="Tag"/>
+                                    <i><h3><h:message for="tag" style="color:brown"/></h3></i>
+                                    <br/>
+                                    <h:commandButton value="Almacenar Tag" action="#{audioVisualController.addTag()}" title="Almacenar" class="btn btn-info" style="text-align: center;"/>
+                                    <h:dataTable id="tags" var="item" value="#{audioVisualController.tags}" styleClass="table table-striped table-hover">
+                                        <h:column>
+                                            <p><font size="3"><i><h:outputText value="#{item.palabra}" class="col-sm-5 control-label"/></i></font></p>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <br/><br/><br/><br/><br/><br/><font style="color: darkred"><i><h1><h:outputText value="Paso 4" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></h1></i></font>
+                                <br/><i><h3><p align="justify"><h:outputText value="Escoja una de las Franjas postuladas para realacionar allí su Contenido" class="col-sm-offset-1 col-sm-6 col-xs-12 control-label"/></p></h3></i>
+                            </div>
+                            <br/><br/>
+                            <div class="form-group col-sm-offset-1 col-sm-7 col-md-8 col-xs-12">
+                                <h:dataTable rendered="#{audioVisualController.tema == null}" id="temas" var="item" value="#{audioVisualController.temasRelacion}" styleClass="table table-striped table-hover">
+                                    <h:column>
+                                        <p><font size="4"><strong><h:outputText value="#{item.nombre}"/></strong></font></p>
+                                    </h:column>
+                                    <h:column>
+                                        <h:commandButton value="Elegir Franja" action="#{audioVisualController.setTema(item)}" title="Elegir" class="btn btn-info" style="text-align: center;"/>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                            <h:outputText rendered="#{audioVisualController.tema != null}" value="Franja seleccionada: #{audioVisualController.tema.nombre}"/>
+                            <br/><br/><br/><br/><br/><br/>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-3 col-xs-12">
+                                    <h:commandButton value="Subir Archivo" rendered="#{utilControler.session}" title="Subir Archivo" action="#{audioVisualController.registrarAudiovisual()}" class="btn btn-primary" style="text-align: center;"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </article>
+                </div>
+            </h:body>
+        </f:view>
+    </ui:define>
+</ui:composition>
